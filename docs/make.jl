@@ -91,14 +91,12 @@ docs = [
         name = "ManifoldDiff.jl",
         giturl = "https://github.com/JuliaManifolds/ManifoldDiff.jl.git",
     ),
-    MultiDocumenter.DropdownNav("Examples", [
-        MultiDocumenter.MultiDocRef(
+    MultiDocumenter.MultiDocRef(
             upstream = joinpath(clonedir, "ManoptExamples.jl"),
             path = "manoptexamples",
             name = "Manopt Examples",
             giturl = "https://github.com/JuliaManifolds/ManoptExamples.jl.git",
-        ),
-    ]),
+    ),
 ]
 
 # ## Build docs
@@ -110,7 +108,7 @@ MultiDocumenter.make(
         index_versions = ["stable"],
         engine = MultiDocumenter.FlexSearch
     ),
-    brand_image = MultiDocumenter.BrandImage("https://juliadocumenter.github.io",
+    brand_image = MultiDocumenter.BrandImage("https://juliamanifolds.github.io",
                                                               joinpath("assets",
                                                                        "logo.png")),
 )
