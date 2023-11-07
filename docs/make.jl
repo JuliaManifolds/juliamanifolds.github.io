@@ -56,7 +56,7 @@ makedocs(;
 # ## Build Multidocs – for now an entry each Repo
 docs = [
     MultiDocumenter.MultiDocRef(
-        upstream = "build",
+        upstream = joinpath(@__DIR__,"build"),
         path = "juliamanifolds",
         name = "Home",
         fix_canonical_url = false,
