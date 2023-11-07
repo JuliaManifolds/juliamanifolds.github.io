@@ -143,6 +143,7 @@ if "--deploy" in ARGS
         println(e)
         println("Out path: ", outpath)
         println("PWD: ", pwd())
+        println(collect(readdir(pwd())))
         println(collect(readdir(@__DIR__)))
         exit(1)
     end
