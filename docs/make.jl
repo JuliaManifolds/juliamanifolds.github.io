@@ -11,10 +11,10 @@ docs/make.jl
 Render the `JuliaManifolds` GitHub Organisation Multidocumenter with optinal arguments
 
 Arguments
-* `--deploy`       - deploy docs
+* `--deploy`       - deploy docs to GitHub pages (e.g. on CI)
 * `--help`         - print this help and exit without rendering the documentation
+* `--serve`        - use `LiveServer.jl` to serve the current docs, also launches the browser
 * `--temp`         – clone the other repositories into a temp folder – otherwise use clones/
-* `--deploy`       - deploy docs to GitHub Pages
 """,
     )
     exit(0)
@@ -31,17 +31,38 @@ if Base.active_project() != joinpath(@__DIR__, "Project.toml")
 end
 
 clonedir = ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "clones")
-outpath =  ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "build")
+outpath =  ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "out")
 
 @info """
 Cloning packages into: $(clonedir)
 Building aggregate site into: $(outpath)
 """
 
-using MultiDocumenter, LiveServer
+using MultiDocumenter, LiveServer, Documenter
 
-# ## Build Menu – for now an entry each
+# Build local docs
+makedocs(;
+    format=Documenter.HTML(;
+        prettyurls=false, assets=["assets/favicon.ico"]
+    ),
+    modules=Module[],
+    authors="Ronny Bergmann",
+    sitename="Julia Manifolds",
+    pages=[
+        "Home" => "index.md",
+    ]
+)
+
+# ## Build Multidocs – for now an entry each Repo
 docs = [
+    MultiDocumenter.MultiDocRef(
+        upstream = "build",
+        path = "juliamanifolds",
+        name = "Home",
+        giturl = "",
+        branch = "",
+        fix_canonical_url = false,
+    ),
     MultiDocumenter.MultiDocRef(
         upstream = joinpath(clonedir, "ManifoldsBase.jl"),
         path = "manifoldsbase",
@@ -86,7 +107,7 @@ docs = [
 MultiDocumenter.make(
     outpath,
     docs;
-    assets_dir = "docs/src/assets",
+    assets_dir = "src/assets",
     search_engine = MultiDocumenter.SearchConfig(
         index_versions = ["stable"],
         engine = MultiDocumenter.FlexSearch
@@ -98,7 +119,7 @@ MultiDocumenter.make(
 
 # ## Deploy
 if "--deploy" in ARGS
-    @warn "Deploying to GitHub" ARGS
+    @warn "Deploying to GitHub"
     gitroot = normpath(joinpath(@__DIR__, ".."))
     run(`git pull`)
     outbranch = "gh-pages"
@@ -136,3 +157,4 @@ else
     @info "Skipping deployment, '--deploy' not passed. Generated files in docs/$(outpath)."
 end
 # ## Serve ?
+("--serve" in ARGS) && serve(dir=joinpath(@__DIR__, outpath), launch_browser=true)
