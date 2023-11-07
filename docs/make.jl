@@ -40,7 +40,7 @@ Building aggregate site into: $(outpath)
 
 using MultiDocumenter, LiveServer, Documenter
 
-# Build local docs
+# Build local docs - but do bot deploy
 makedocs(;
     format=Documenter.HTML(;
         prettyurls=false, assets=["assets/favicon.ico"]
