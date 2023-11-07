@@ -59,7 +59,6 @@ docs = [
         upstream = "build",
         path = "juliamanifolds",
         name = "Home",
-        giturl = "",
         fix_canonical_url = false,
     ),
     MultiDocumenter.MultiDocRef(
