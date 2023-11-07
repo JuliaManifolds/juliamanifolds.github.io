@@ -135,17 +135,8 @@ if "--deploy" in ARGS
         rm(file; force = true, recursive = true)
     end
     # copy the rendered docs
-    try
-        for file in readdir(outpath)
-            cp(joinpath(outpath, file), joinpath(gitroot, file))
-        end
-    catch e
-        println(e)
-        println("Out path: ", outpath)
-        println("PWD: ", pwd())
-        println(collect(readdir(pwd())))
-        println(collect(readdir(@__DIR__)))
-        exit(1)
+    for file in readdir(outpath)
+        cp(joinpath(outpath, file), joinpath(gitroot, file))
     end
     # Add and commit new files
     run(`git add .`)
