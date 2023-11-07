@@ -8,7 +8,7 @@ if "--help" ∈ ARGS
         """
 docs/make.jl
 
-Render the `JuliaManifolds` GitHub Organisation Multidocumenter with optinal arguments
+Render the `JuliaManifolds` GitHub Organisation Multidocumenter with optional arguments
 
 Arguments
 * `--deploy`       - deploy docs to GitHub pages (e.g. on CI)
@@ -135,8 +135,15 @@ if "--deploy" in ARGS
         rm(file; force = true, recursive = true)
     end
     # copy the rendered docs
-    for file in readdir(outpath)
-        cp(joinpath(outpath, file), joinpath(gitroot, file))
+    try
+        for file in readdir(outpath)
+            cp(joinpath(outpath, file), joinpath(gitroot, file))
+        end
+    catch e
+        println(e)
+        println("Out path: ", outpath)
+        println("PWD: ", pwd())
+        exit(1)
     end
     # Add and commit new files
     run(`git add .`)
