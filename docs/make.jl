@@ -110,7 +110,7 @@ MultiDocumenter.make(
     ),
     brand_image = MultiDocumenter.BrandImage("https://juliamanifolds.github.io",
                                                               joinpath("assets",
-                                                                       "logo.png")),
+                                                                       "logo-dark.png")),
 )
 
 # ## Deploy
