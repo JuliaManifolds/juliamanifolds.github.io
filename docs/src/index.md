@@ -9,7 +9,7 @@ On the other hand we provide packages that provide tools for general manifolds u
 [Manopt.jl](https://juliamanifolds.github.io/manopt/stable/) to perform optimization on Manifolds,
 [ManifoldDiffEq.jl](https://juliamanifolds.github.io/manifolddiffeq/) to solve differential equations,
 or [ManifoldDiff.jl](https://juliamanifolds.github.io/manifolddiff/stable/) to provide AD tools
-for functions deifned on manifolds.
+for functions defined on manifolds.
 
 While all these packages have their own documentation, they are aggregated here as well using
 [MultiDocumenter.jl](https://github.com/JuliaComputing/MultiDocumenter.jl) to have a single place for all documentation, especially the overarching search functionality.
