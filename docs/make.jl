@@ -103,7 +103,7 @@ docs = [
 MultiDocumenter.make(
     outpath,
     docs;
-    assets_dir = "src/assets",
+    assets_dir = "docs/src/assets",
     search_engine = MultiDocumenter.SearchConfig(
         index_versions = ["stable"],
         engine = MultiDocumenter.FlexSearch
