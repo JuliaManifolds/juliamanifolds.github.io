@@ -1,112 +1,131 @@
 # Julia Manifolds
 
 ```mermaid
+---
+config:
+  layout: elk
+---
 flowchart TB
-    classDef registered fill:#EEEDFE,stroke:#534AB7,color:#3C3489
-    classDef unregistered fill:#F1EFE8,stroke:#888780,color:#444441
-    classDef external fill:#FAC775,stroke:#BA7517,color:#412402
+  subgraph subGraph0["Core Packages"]
+        ManifoldsBase["ManifoldsBase"]
+        Manifolds["Manifolds"]
+        ManifoldDiff["ManifoldDiff"]
+        LieGroups["LieGroups"]
+  end
 
-    ManifoldsBase:::registered
-    Glossaries:::registered
-    AlgorithmsInterface:::registered
-    ManifoldDiff:::registered
-    Manifolds:::registered
-    LieGroups:::registered
-    ManifoldDiffEq:::registered
-    Manopt:::registered
-    ManifoldMakie:::registered
-    ManifoldAsymptote:::registered
-    ManoptExamples:::registered
-    ManifoldsGPU:::registered
-    GeometricKalman:::unregistered
-    MultivariateDataAnalysis:::unregistered
-    ManifoldMeasures:::unregistered
-    ManifoldDistributions:::unregistered
-    FunManifolds:::unregistered
-    ManifoldML:::unregistered
-    ManifoldExamples:::unregistered
-    StatisticalManifolds:::unregistered
-    Makie:::external
-    Plots:::external
-    Quaternions:::external
-    RecursiveArrayTools:::external
-    Statistics:::external
-    FiniteDiff:::external
-    FiniteDifferences:::external
-    ForwardDiff:::external
-    ReverseDiff:::external
-    Zygote:::external
-    LRUCache:::external
-    LineSearches:::external
-    JuMP:::external
-    CUDA:::external
-    OrdinaryDiffEq:::external
-    NLsolve:::external
-    HybridArrays:::external
-    Distributions:::external
-    RecipesBase:::external
-    Colors:::external
-    BoundaryValueDiffEqMIRK:::external
+  subgraph subGraph1["Optimization & Algorithms"]
+        Manopt["Manopt"]
+        ManoptExamples["ManoptExamples"]
+        ManifoldDiffEq["ManifoldDiffEq"]
+  end
 
-    Manifolds --> ManifoldsBase
-    Manifolds --> ManifoldDiff
-    ManifoldDiff --> ManifoldsBase
-    Manopt --> ManifoldsBase
-    Manopt --> ManifoldDiff
-    Manopt --> Glossaries
-    Manopt -.-> Manifolds
-    Manopt -.-> LRUCache
-    Manopt -.-> LineSearches
-    Manopt -.-> JuMP
-    LieGroups --> ManifoldsBase
-    LieGroups --> Manifolds
-    LieGroups -.-> RecursiveArrayTools
-    ManifoldDiffEq --> ManifoldsBase
-    ManifoldDiffEq --> Manifolds
-    ManifoldDiffEq --> LieGroups
-    ManifoldMakie --> Manifolds
-    ManifoldsBase -.-> Makie
-    ManifoldsBase -.-> Plots
-    ManifoldsBase -.-> Quaternions
-    ManifoldsBase -.-> RecursiveArrayTools
-    ManifoldsBase -.-> Statistics
-    ManifoldDiff -.-> FiniteDiff
-    ManifoldDiff -.-> FiniteDifferences
-    ManifoldDiff -.-> ForwardDiff
-    ManifoldDiff -.-> ReverseDiff
-    ManifoldDiff -.-> Zygote
-    Manifolds -.-> RecursiveArrayTools
-    Manifolds -.-> OrdinaryDiffEq
-    Manifolds -.-> NLsolve
-    Manifolds -.-> HybridArrays
-    Manifolds -.-> Distributions
-    Manifolds -.-> RecipesBase
-    Manifolds -.-> Colors
-    Manifolds -.-> BoundaryValueDiffEqMIRK
-    ManoptExamples --> Manifolds
-    ManoptExamples --> ManifoldsBase
-    ManoptExamples --> ManifoldDiff
-    ManoptExamples -.-> Manopt
-    ManifoldAsymptote --> Manifolds
-    ManifoldsGPU --> Manifolds
-    ManifoldsGPU --> ManifoldsBase
-    ManifoldsGPU --> ManifoldDiff
-    ManifoldsGPU -.-> CUDA
-    GeometricKalman --> Manifolds
-    GeometricKalman --> ManifoldsBase
-    GeometricKalman --> Manopt
-    MultivariateDataAnalysis --> Manifolds
-    MultivariateDataAnalysis --> ManifoldsBase
-    MultivariateDataAnalysis --> Manopt
-    ManifoldMeasures --> Manifolds
-    ManifoldMeasures --> ManifoldsBase
-    FunManifolds --> Manifolds
-    FunManifolds --> ManifoldsBase
-    ManifoldML --> Manifolds
-    ManifoldML --> ManifoldsBase
-    ManifoldML --> Manopt
-    StatisticalManifolds --> Manifolds
-    StatisticalManifolds --> ManifoldsBase
+  subgraph Visualization["Visualization"]
+        ManifoldMakie["ManifoldMakie"]
+        ManifoldAsymptote["ManifoldAsymptote"]
+  end
+
+  subgraph subGraph3["Extensions & Integrations"]
+        ManifoldsGPU["ManifoldsGPU"]
+        Glossaries["Glossaries"]
+        AlgorithmsInterface["AlgorithmsInterface"]
+  end
+
+  subgraph subGraph4["External Dependencies"]
+        Makie["Makie"]
+        Plots["Plots"]
+        Quaternions["Quaternions"]
+        RecursiveArrayTools["RecursiveArrayTools"]
+        Statistics["Statistics"]
+        FiniteDiff["FiniteDiff"]
+        FiniteDifferences["FiniteDifferences"]
+        ForwardDiff["ForwardDiff"]
+        ReverseDiff["ReverseDiff"]
+        Zygote["Zygote"]
+        LRUCache["LRUCache"]
+        LineSearches["LineSearches"]
+        JuMP["JuMP"]
+        CUDA["CUDA"]
+        OrdinaryDiffEq["OrdinaryDiffEq"]
+        NLsolve["NLsolve"]
+        HybridArrays["HybridArrays"]
+        Distributions["Distributions"]
+        RecipesBase["RecipesBase"]
+        Colors["Colors"]
+        BoundaryValueDiffEqMIRK["BoundaryValueDiffEqMIRK"]
+  end
+
+  %% Core dependencies
+  Manifolds --> ManifoldsBase & ManifoldDiff
+  ManifoldDiff --> ManifoldsBase
+  LieGroups --> ManifoldsBase
+
+  %% Optimization relationships
+  Manopt --> ManifoldsBase & ManifoldDiff & Glossaries
+  ManoptExamples --> Manopt & Manifolds
+  ManifoldDiffEq --> ManifoldsBase & Manifolds & LieGroups
+
+  %% Visualization
+  ManifoldMakie --> Manifolds
+  ManifoldAsymptote --> Manifolds
+
+  %% Extensions
+  ManifoldsGPU --> Manifolds & ManifoldsBase
+  AlgorithmsInterface --> Manopt
+  Glossaries --> Manopt
+
+  %% External relationships
+  ManifoldMakie --> Makie & Colors
+  ManifoldAsymptote --> Plots
+  ManifoldDiffEq --> OrdinaryDiffEq & NLsolve
+  Manopt --> ForwardDiff & ReverseDiff & Zygote & LineSearches & LRUCache
+  ManifoldsGPU --> CUDA
+  ManifoldDiff --> FiniteDiff & FiniteDifferences
+  Manifolds --> Statistics & RecipesBase & HybridArrays
+  LieGroups --> Quaternions
+  ManoptExamples --> Distributions
+
+  %% Class assignments
+  ManifoldsBase:::core
+  Manifolds:::core
+  ManifoldDiff:::core
+  LieGroups:::core
+  Manopt:::optimization
+  ManoptExamples:::optimization
+  ManifoldDiffEq:::optimization
+  ManifoldMakie:::visualization
+  ManifoldAsymptote:::visualization
+  ManifoldsGPU:::extensions
+  Glossaries:::extensions
+  AlgorithmsInterface:::extensions
+
+  Makie:::external
+  Plots:::external
+  Quaternions:::external
+  RecursiveArrayTools:::external
+  Statistics:::external
+  FiniteDiff:::external
+  FiniteDifferences:::external
+  ForwardDiff:::external
+  ReverseDiff:::external
+  Zygote:::external
+  LRUCache:::external
+  LineSearches:::external
+  JuMP:::external
+  CUDA:::external
+  OrdinaryDiffEq:::external
+  NLsolve:::external
+  HybridArrays:::external
+  Distributions:::external
+  RecipesBase:::external
+  Colors:::external
+  BoundaryValueDiffEqMIRK:::external
+
+  %% Styling
+  classDef core stroke:#4f46e5,fill:#eef2ff,color:#312e81
+  classDef optimization stroke:#16a34a,fill:#f0fdf4,color:#064e3b
+  classDef visualization stroke:#0891b2,fill:#ecfeff,color:#083344
+  classDef extensions stroke:#ca8a04,fill:#fefce8,color:#422006
+  classDef external stroke:#6b7280,fill:#f9fafb,color:#111827
 ```
 
 The [GitHub Organisation Julia Manifolds](https://github.com/JuliaManifolds)
