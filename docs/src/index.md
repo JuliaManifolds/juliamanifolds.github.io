@@ -13,6 +13,15 @@ flowchart TB
     classDef extend      stroke:#ca8a04,fill:#fefce8,color:#422006;
     classDef ext        stroke:#008a04,fill:#fefce8,color:#422006;
 
+    subgraph Tools["Tools"]
+        direction LR
+        G[Glossaries]:::tool
+        AI[AlgorithmsInterface]:::tool
+        MGPU[ManifoldsGPU]:::tool
+    end
+    subgraph Extensions["Extensions"]
+        RAT[RecursiveArrayTools]:::extend
+    end
     subgraph Core["Core Packages"]
         direction TB
         MB[ManifoldsBase]:::core
@@ -40,18 +49,10 @@ flowchart TB
     end
     M --> MA
     M --> MM
-    subgraph Tools["Tools"]
-        direction TB
-        G[Glossaries]:::tool
-        AI[AlgorithmsInterface]:::tool
-        MGPU[ManifoldsGPU]:::tool
-    end
+
     G --> MO
     G --> LG
     M --> MGPU
-    subgraph Extensions["Extensions"]
-        RAT[RecursiveArrayTools]:::extend
-    end
     MB -...- RAT
     subgraph External["External Packages"]
         Makie[Makie]:::ext
