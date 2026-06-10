@@ -22,28 +22,28 @@
         \tikzset{Func/.style={draw=TolMutedTeal, fill=TolMutedTeal!10, ellipse}}
         \tikzset{Vis/.style={draw=TolMutedOlive, fill=TolMutedOlive!10, ellipse}}
         \tikzset{External/.style={draw=TolMutedSand, fill=TolMutedSand!10, ellipse}}
+        \tikzset{Examples/.style={draw=TolMutedRose, fill=TolMutedRose!10, ellipse}}
         % Styles of lines
         % format: a -- B ABExt loading B extends A
         \tikzset{extends/.style={dashed, -{Stealth[length=2.25mm]}, thick}}
         % format A -- B A is a dependency of B, we draw B-->A
         \tikzset{depends/.style={solid, {Stealth[length=2.25mm]}-,thick}}
         \node[Base] (MB) at (0,0) {ManifoldsBase.jl};
-        \node[Library] (M) at ($(MB) + (135:2.5cm)$) {Manifolds.jl};
-        \node[Library] (MO) at ($(MB) + (45:2.5cm)$) {Manopt.jl};
+        \node[Library] (M) at ($(MB) + (135:2.75cm)$) {Manifolds.jl};
+        \node[Library] (MO) at ($(MB) + (45:2.75cm)$) {Manopt.jl};
         \node[Library] (LG) at ($(MB) + (180:4cm)$) {LieGroups.jl};
-        \node[Library] (MDE) at ($(MB) + (220:2.75cm)$) {ManifoldDiffEq.jl};
-        \node[Func] (MD) at ($(MB) + (320:2.75cm)$) {ManifoldDiff.jl};
+        \node[Library] (MDE) at ($(MB) + (320:2.75cm)$) {ManifoldDiffEq.jl};
+        \node[Func] (MD) at ($(MB) + (220:2.75cm)$) {ManifoldDiff.jl};
         \draw[depends] (MB) -- (M);
         \draw[depends] (MB) -- (MO);
         \draw[depends] (MB) -- (LG);
         \draw[depends] (M) -- (LG);
         \draw[depends] (MB) -- (MDE);
-        \draw[depends] (MB) -- (MD);
+        \draw[depends] (M) -- (MD);
         \draw[extends] (M) -- (MO);
         % Same direction as Manopt continued
-        \node[ellipse, draw] (MOE) at ($(MO) + (45:2.75cm)$) {ManoptExamples.jl};
+        \node[Examples] (MOE) at ($(MO) + (45:2.75cm)$) {ManoptExamples.jl};
         \draw[depends] (MO) -- (MOE);
-        \draw[depends] (MD) -- (MOE);
         %
         % Sidequest: Glossaries
         \node[Func] (G) at ($(MB) + (12.25:5.5cm)$) {Glossaries.jl};
@@ -61,16 +61,38 @@
         %
         %
         % Extensions and outer packages on a large circle
-        \node[External] (Asymptote) at (150:8.5) {Asymptote.jl};
-        \draw [depends] (MA) -- (Asymptote);
+        \node[External] (Gr) at (85:8.5) {Graphs.jl};
+        \node[External] (SA) at (110:8.5) {StaticArrays.jl};
+        \node[External] (Quat) at (125:8.5) {Quaternions.jl};
+        \node[External] (Asymptote) at (140:8.5) {Asymptote.jl};
+        \draw[depends] (MA) -- (Asymptote);
+        \node[External] (Test) at (155:8.5) {Test.jl};
         \node[External] (Makie) at (170:8.5) {Makie.jl};
-        \draw [depends] (MM) -- (Makie);
+        \draw[depends] (MM) -- (Makie);
         \node[External] (RAT) at (185:8.5) {RecursiveArrayTools.jl};
+        \node[External] (Plots) at (200:8.5) {Plots.jl};
+        \node[External] (RipQP) at (320:8.5) {RipQP.jl};
+        \node[External] (QuadraticModels) at (335:8.5) {QuadraticModels.jl};
+        \node[External] (LRU) at (350:8.5) {LRUCaches.jl};
+        \node[External] (LS) at (20:8.5) {Linesearches.jl};
+        \draw[depends] (MM) -- (Makie);
         \begin{pgfonlayer}{background}
+            \draw[depends] (MD) -- (MOE);
+            %
+            \draw[extends] (Test) -- (M);
+            \draw[extends] (Test) -- (LG);
+            \draw[extends] (Plots) -- (MB);
+            \draw[extends] (Makie) -- (MB);
+            \draw[extends] (Quat) -- (MB);
             \draw[extends] (RAT) -- (MO);
             \draw[extends] (RAT) -- (M);
             \draw[extends] (RAT) -- (MB);
             \draw[extends] (RAT) -- (LG);
+            \draw[extends] (RipQP) -- (MO);
+            \draw[extends] (QuadraticModels) -- (MO);
+            \draw[depends] (M) -- (Quat);
+            \draw[extends] (LRU) -- (MO);
+            \draw[extends] (LS) -- (MO);
         \end{pgfonlayer}
     \end{tikzpicture}
 \end{document}
