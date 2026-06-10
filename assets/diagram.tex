@@ -27,11 +27,11 @@
         % format: a -- B ABExt loading B extends A
         \tikzset{extends/.style={dashed, -{Stealth[length=2.25mm]}, thick}}
         % V2: to external packages
-        \tikzset{extends2/.style={dashed, -{Stealth[length=2.25mm]}, thick, black!50}}
+        \tikzset{extends2/.style={dashed, -{Stealth[length=2.25mm]}, thick, TolMutedSand}}
         % format A -- B A is a dependency of B, we draw B-->A
         \tikzset{depends/.style={solid, {Stealth[length=2.25mm]}-,thick}}
         % V2: to external packages
-        \tikzset{depends2/.style={solid, {Stealth[length=2.25mm]}-,thick, black!50}}
+        \tikzset{depends2/.style={solid, {Stealth[length=2.25mm]}-,thick, TolMutedSand}}
         \node[Base] (MB) at (0,0) {ManifoldsBase.jl};
         %
         % Ring I: Core packages
@@ -71,18 +71,18 @@
         % Extensions and outer packages on a large circle
         \node[External] (LRU) at (0:9.5) {LRUCaches.jl};
         \node[External] (LS) at (15:9.5) {Linesearches.jl};
-        \node[External] (MatEq) at (30:9.5) {SpecialFunctions.jl};
+        \node[External] (SF) at (30:9.5) {SpecialFunctions.jl};
         \node[External] (MatEq) at (45:9.5) {MatrixEquations.jl};
-        \node[External] (Kr) at (60:9.5) {Kronecker.jl};
-        \node[External] (Gr) at (75:9.5) {Graphs.jl};
-        \node[External] (SWG) at (90:9.5) {SimpleWeightedGraphs.jl};
+        \node[External] (Gr) at (90:9.5) {Graphs.jl};
+        \node[External] (Kr) at (75:9.5) {Kronecker.jl};
+        \node[External] (SWG) at (60:9.5) {SimpleWeightedGraphs.jl};
         \node[External] (SA) at (105:9.5) {StaticArrays.jl};
         \node[External] (Asymptote) at (120:9.5) {Asymptote.jl};
         \node[External] (Makie) at (135:9.5) {Makie.jl};
-        \node[External] (Quat) at (150:9.5) {Quaternions.jl};
-        \node[External] (Test) at (165:9.5) {Test.jl};
+        \node[External] (Test) at (150:9.5) {Test.jl};
         \node[External] (Plots) at (180:9.5) {Plots.jl};
-        \node[External] (RAT) at (195:9.5) {RecursiveArrayTools.jl};
+        \node[External] (RAT) at (165:9.5) {RecursiveArrayTools.jl};
+        \node[External] (Quat) at (195:9.5) {Quaternions.jl};
         \node[External] (SB) at (210:9.5) {StatsBase.jl};
         \node[External] (Tullio) at (225:9.5) {Tullio.jl};
         \node[External] (AD) at (240:9.5) {ADTypes.jl};
@@ -93,11 +93,10 @@
         \node[External] (MIRK) at (315:9.5) {BoundaryValueDiffEqMIRK.jl};
         \node[External] (RipQP) at (330:9.5) {RipQP.jl};
         \node[External] (QM) at (345:9.5) {QuadraticModels.jl};
-        \draw[depends] (MA) -- (Asymptote);
-        \draw[depends] (MM) -- (Makie);
-        \draw[depends] (MM) -- (Makie);
+        \draw[depends2] (MA) -- (Asymptote);
+        \draw[depends2] (MM) -- (Makie);
         \begin{pgfonlayer}{background}
-            \draw[depends] (MD) -- (MOE);
+            \draw[depends] (MD) to [bend right=50] (MOE);
             %
             \draw[extends2] (Test) -- (M);
             \draw[extends2] (Test) -- (LG);
@@ -111,9 +110,13 @@
             \draw[extends2] (RAT) -- (LG);
             \draw[extends2] (RipQP) -- (MO);
             \draw[extends2] (QM) -- (MO);
-            \draw[depends2] (M) -- (Quat);
+            \draw[depends2] (M) to [bend right=22.5] (Quat);
             \draw[depends2] (M) -- (Gr);
-            \draw[depends2] (M) -- (SA);
+            \draw[depends2] (M) -- (Kr);
+            \draw[depends2] (M) -- (SWG);
+            \draw[depends2] (M) -- (SF);
+            \draw[depends2] (M) to [bend left=22.5] (MatEq);
+            \draw[depends2] (M) to [bend left=22.5] (SA);
             \draw[extends2] (LRU) -- (MO);
             \draw[extends2] (LS) -- (MO);
         \end{pgfonlayer}
