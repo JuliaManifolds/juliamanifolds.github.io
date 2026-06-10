@@ -1,0 +1,76 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+% Define muted colors.
+\definecolor{TolMutedBlue}{HTML}{332288}
+\definecolor{TolMutedCyan}{HTML}{88CCEE}
+\definecolor{TolMutedTeal}{HTML}{44AA99}
+\definecolor{TolMutedGreen}{HTML}{117733}
+\definecolor{TolMutedOlive}{HTML}{999933}
+\definecolor{TolMutedSand}{HTML}{DDCC77}
+\definecolor{TolMutedRose}{HTML}{CC6677}
+\definecolor{TolMutedWine}{HTML}{882255}
+\definecolor{TolMutedPurple}{HTML}{AA4499}
+\begin{document}
+    \begin{tikzpicture}
+        % Styles of nodes
+        \tikzset{Base/.style={draw=TolMutedBlue, fill=TolMutedBlue!10, ellipse}}
+        \tikzset{Library/.style={draw=TolMutedGreen, fill=TolMutedGreen!10, ellipse}}
+        \tikzset{Func/.style={draw=TolMutedTeal, fill=TolMutedTeal!10, ellipse}}
+        \tikzset{Vis/.style={draw=TolMutedOlive, fill=TolMutedOlive!10, ellipse}}
+        \tikzset{External/.style={draw=TolMutedSand, fill=TolMutedSand!10, ellipse}}
+        % Styles of lines
+        % format: a -- B ABExt loading B extends A
+        \tikzset{extends/.style={dashed, -{Stealth[length=2.25mm]}, thick}}
+        % format A -- B A is a dependency of B, we draw B-->A
+        \tikzset{depends/.style={solid, {Stealth[length=2.25mm]}-,thick}}
+        \node[Base] (MB) at (0,0) {ManifoldsBase.jl};
+        \node[Library] (M) at ($(MB) + (135:2.5cm)$) {Manifolds.jl};
+        \node[Library] (MO) at ($(MB) + (45:2.5cm)$) {Manopt.jl};
+        \node[Library] (LG) at ($(MB) + (180:4cm)$) {LieGroups.jl};
+        \node[Library] (MDE) at ($(MB) + (220:2.75cm)$) {ManifoldDiffEq.jl};
+        \node[Func] (MD) at ($(MB) + (320:2.75cm)$) {ManifoldDiff.jl};
+        \draw[depends] (MB) -- (M);
+        \draw[depends] (MB) -- (MO);
+        \draw[depends] (MB) -- (LG);
+        \draw[depends] (M) -- (LG);
+        \draw[depends] (MB) -- (MDE);
+        \draw[depends] (MB) -- (MD);
+        \draw[extends] (M) -- (MO);
+        % Same direction as Manopt continued
+        \node[ellipse, draw] (MOE) at ($(MO) + (45:2.75cm)$) {ManoptExamples.jl};
+        \draw[depends] (MO) -- (MOE);
+        \draw[depends] (MD) -- (MOE);
+        %
+        % Sidequest: Glossaries
+        \node[Func] (G) at ($(MB) + (12.25:5.5cm)$) {Glossaries.jl};
+        \draw[depends] (MO) -- (G);
+        \node[Base] (AI) at ($(MB) + (0:5.5cm)$) {AlgorithmInterface.jl};
+
+        %
+        % Sidequest Viz
+        \node[Vis] (MA) at ($(M) + (112.5:2.75cm)$) {ManifoldAsymptiote.jl};
+        \draw[depends] (M) -- (MA);
+        \node[Vis] (MM) at ($(M) + (157.5:2.75cm)$) {ManifoldMakie.jl};
+        \draw[depends] (M) -- (MM);
+        \node[Func] (MG) at ($(M) + (22.5:2.75cm)$) {ManifoldsGPU.jl};
+        \draw[depends] (M) -- (MG);
+        %
+        %
+        % Extensions and outer packages on a large circle
+        \node[External] (Asymptote) at (150:8.5) {Asymptote.jl};
+        \draw [depends] (MA) -- (Asymptote);
+        \node[External] (Makie) at (170:8.5) {Makie.jl};
+        \draw [depends] (MM) -- (Makie);
+        \node[External] (RAT) at (185:8.5) {RecursiveArrayTools.jl};
+        \begin{pgfonlayer}{background}
+            \draw[extends] (RAT) -- (MO);
+            \draw[extends] (RAT) -- (M);
+            \draw[extends] (RAT) -- (MB);
+            \draw[extends] (RAT) -- (LG);
+        \end{pgfonlayer}
+    \end{tikzpicture}
+\end{document}
