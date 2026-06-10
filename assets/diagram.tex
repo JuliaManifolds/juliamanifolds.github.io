@@ -40,11 +40,12 @@
         \node[Library] (LG) at ($(MB) + (180:4.5cm)$) {LieGroups.jl};
         \node[Library] (MDE) at ($(MB) + (320:3.5cm)$) {ManifoldDiffEq.jl};
         \node[Func] (MD) at ($(MB) + (220:3.5cm)$) {ManifoldDiff.jl};
-        \draw[depends] (MB) -- (M);
-        \draw[depends] (MB) -- (MO);
-        \draw[depends] (MB) -- (LG);
+        \draw[depends] (M) -- (MB);
+        \draw[depends] (MO) -- (MB);
+        \draw[depends] (LG) -- (MB);
         \draw[depends] (M) -- (LG);
-        \draw[depends] (MB) -- (MDE);
+        \draw[depends] (MDE) -- (MB);
+        \draw[depends] (MD) -- (MB);
         \draw[depends] (M) -- (MD);
         \draw[extends] (M) -- (MO);
         % Ring II
@@ -80,19 +81,20 @@
         \node[External] (Asymptote) at (120:9.5) {Asymptote.jl};
         \node[External] (Makie) at (135:9.5) {Makie.jl};
         \node[External] (Test) at (150:9.5) {Test.jl};
+        \node[External] (Quat) at (165:9.5) {Quaternions.jl};
         \node[External] (Plots) at (180:9.5) {Plots.jl};
-        \node[External] (RAT) at (165:9.5) {RecursiveArrayTools.jl};
-        \node[External] (Quat) at (195:9.5) {Quaternions.jl};
-        \node[External] (SB) at (210:9.5) {StatsBase.jl};
-        \node[External] (Tullio) at (225:9.5) {Tullio.jl};
-        \node[External] (AD) at (240:9.5) {ADTypes.jl};
-        \node[External] (DI) at (255:9.5) {DifferentiationInterface.jl};
+        \node[External] (RAT) at (195:9.5) {RecursiveArrayTools.jl};
+        \node[External] (DI) at (210:9.5) {DifferentiationInterface.jl};
+        \node[External] (AD) at (225:9.5) {ADTypes.jl};
+        \node[External] (SB) at (240:9.5) {StatsBase.jl};
+        \node[External] (Tullio) at (255:9.5) {Tullio.jl};
         \node[External] (SLMB) at (270:9.5) {SciMLBase.jl};
         \node[External] (ODE) at (285:9.5) {OrdinaryDiffEq.jl};
         \node[External] (NLS) at (300:9.5) {NLSolve.jl};
         \node[External] (MIRK) at (315:9.5) {BoundaryValueDiffEqMIRK.jl};
         \node[External] (RipQP) at (330:9.5) {RipQP.jl};
         \node[External] (QM) at (345:9.5) {QuadraticModels.jl};
+        \node[External, text width=2.8cm, align=center] (Diffs) at (222.5:12.5) {FiniteDiff.jl\\FiniteDifferences.jl\\ForwardDiff.jl\\ReverseDiff.jl\\Zygote.jl};
         \draw[depends2] (MA) -- (Asymptote);
         \draw[depends2] (MM) -- (Makie);
         \begin{pgfonlayer}{background}
@@ -104,21 +106,36 @@
             \draw[extends2] (Plots) -- (M);
             \draw[extends2] (Makie) -- (MB);
             \draw[extends2] (Quat) -- (MB);
-            \draw[extends2] (RAT) -- (MO);
             \draw[extends2] (RAT) -- (M);
             \draw[extends2] (RAT) -- (MB);
             \draw[extends2] (RAT) -- (LG);
-            \draw[extends2] (RipQP) -- (MO);
-            \draw[extends2] (QM) -- (MO);
-            \draw[depends2] (M) to [bend right=22.5] (Quat);
+            \draw[depends2] (M) to (Quat);
             \draw[depends2] (M) -- (Gr);
             \draw[depends2] (M) -- (Kr);
             \draw[depends2] (M) -- (SWG);
             \draw[depends2] (M) -- (SF);
+            \draw[depends2] (M) -- (Tullio);
+            \draw[depends2] (M) -- (SB);
             \draw[depends2] (M) to [bend left=22.5] (MatEq);
             \draw[depends2] (M) to [bend left=22.5] (SA);
+            \draw[depends2] (LG) to [bend left=22.5] (SA);
+            % Manopt extensions
+            \draw[extends2] (RAT) -- (MO);
+            \draw[extends2] (RipQP) -- (MO);
+            \draw[extends2] (QM) -- (MO);
             \draw[extends2] (LRU) -- (MO);
             \draw[extends2] (LS) -- (MO);
+            % ManifoldDiff dependencies
+            \draw[depends2] (MD) -- (AD);
+            \draw[depends2] (MD) -- (DI);
+            \draw[depends2] (MD) -- (AD);
+            \draw[depends2] (MD) -- (AD);
+            \draw[extends2] (Diffs) to [bend left = 12.75] (MD);
+            % ManifoldDiffEq dependencies
+            \draw[depends2] (MDE) -- (M);
+            \draw[depends2] (MDE) -- (ODE);
+            \draw[depends2] (MDE) to [bend left=22.5] (RAT);
+            \draw[depends2] (MDE) -- (SLMB);
         \end{pgfonlayer}
     \end{tikzpicture}
 \end{document}
