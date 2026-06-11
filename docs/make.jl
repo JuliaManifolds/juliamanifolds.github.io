@@ -30,7 +30,7 @@ if Base.active_project() != joinpath(@__DIR__, "Project.toml")
 end
 
 
-using Documenter, DocumenterMermaid, LiveServer
+using Documenter, LiveServer
 
 # Build local docs - but do bot deploy
 makedocs(;
