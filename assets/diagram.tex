@@ -69,6 +69,7 @@
         \draw[depends] (M) -- (MM);
         \node[Func] (MG) at ($(MB) + (75:7cm)$) {ManifoldsGPU.jl};
         \draw[depends] (M) -- (MG);
+        \draw[depends] (MB) -- (MG);
         %
         %
         % Extensions and outer packages on a large circle
@@ -91,6 +92,7 @@
         \node[External] (Gr) at ($(MB) + (51:11)$)  {Graphs.jl};
         \node[External] (Kr) at ($(MB) + (59:11)$)  {Kronecker.jl};
         \node[External] (SB) at ($(MB) + (68:11)$)  {StatsBase.jl};
+        \node[External] (CUDA) at ($(MB) + (81:11)$)  {CUDA.jl};
         \node[External] (Asymptote) at ($(MB) + (120:11)$)  {Asymptote.jl};
         \node[External] (GB) at ($(MB) + (130:11)$)  {GeometryBasics.jl};
         \node[External] (Makie) at ($(MB) + (140:11)$)  {Makie.jl};
@@ -158,6 +160,7 @@
             \draw[depends2] (M) to [bend right = 6.125] (SA);
             \draw[depends2] (LG) to [bend left = 0] (SA);
             \draw[depends2] (LG) -- (Quat);
+            \draw[extends2] (CUDA) -- (MG);
             % Manopt extensions
             \draw[extends2] (RAT) to[bend left=12.25] (MO);
             \draw[extends2] (RipQP) -- (MO);
