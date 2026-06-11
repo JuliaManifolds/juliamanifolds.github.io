@@ -45,7 +45,7 @@
         \draw[depends] (M) -- (MB);
         \draw[depends] (MO) -- (MB);
         \draw[depends] (LG) -- (MB);
-        \draw[depends] (M) -- (LG);
+        \draw[depends] (LG) -- (M);
         \draw[depends] (MDE) -- (MB);
         \draw[depends] (MD) -- (MB);
         \draw[depends] (M) to[bend left=22.5] (MD);
@@ -53,66 +53,75 @@
         % Ring II
         %
         % Same direction as Manopt continued
-        \node[Examples] (MOE) at ($(MB) + (50.625:7cm)$) {ManoptExamples.jl};
-        \draw[depends] (MO) -- (MOE);
+        \node[Examples] (MOE) at ($(MB) + (354.375:7cm)$) {ManoptExamples.jl};
+        \draw[depends] (MOE) -- (MO);
         %
         % Sidequest: Glossaries
         \node[Func] (G) at ($(MB) + (28.125:7cm)$) {Glossaries.jl};
         \draw[depends] (MO) -- (G);
-        \node[Base] (AI) at ($(MB) + (264.275:7cm)$) {AlgorithmInterface.jl};
+        \node[Base] (AI) at ($(MB) + (278.75:7cm)$) {AlgorithmInterface.jl};
 
         %
         % Sidequest Viz
         \node[Vis] (MA) at ($(MB) + (112.5:7cm)$) {ManifoldAsymptote.jl};
         \draw[depends] (M) -- (MA);
-        \node[Vis] (MM) at ($(MB) + (135:7cm)$) {ManifoldMakie.jl};
+        \node[Vis] (MM) at ($(MB) + (129.375:7cm)$) {ManifoldMakie.jl};
         \draw[depends] (M) -- (MM);
-        \node[Func] (MG) at ($(MB) + (73.125:7cm)$) {ManifoldsGPU.jl};
+        \node[Func] (MG) at ($(MB) + (75:7cm)$) {ManifoldsGPU.jl};
         \draw[depends] (M) -- (MG);
         %
         %
         % Extensions and outer packages on a large circle
         % excluded: Packages from the base language:
-        % LinearAlgebra, Markdown, Preferences, Printf, Random, Statistics, Test,
+        % LinearAlgebra, Markdown, Preferences, Printf, Random, Statistics,
         % Colors, RecipesBase (since we mention PLots)
+        % DoubleFloats (ManifoldDiffEq)
         % DataStuctures, Dates (Manopt)
-        % Consider to add:
-        % Accessors, ConstructionBase, DiffEqBase, OrdinaryDiffEqCore, SciMLOperators, SimpleUNpack (ManifoldDiffEq)
+        % Currently not added:
         % ScopedValues (for AløgorithmsInterface)
         % Distributions, HybridArrays, DiffEqCallbacks (ext to Manifolds, used in ManoptExamples)
-        % Maybe GeometryBasics? dep for ManifoldMakie
-        % maybe OffsetArrays (ManoptExtamples)
-        \node[External] (LS) at ($(MB) + (355:11)$)  {Linesearches.jl};
-        \node[External] (LRU) at ($(MB) + (5:11)$)  {LRUCaches.jl};
-        \node[External] (RipQP) at ($(MB) + (15:11)$)  {RipQP.jl};
-        \node[External] (QM) at ($(MB) + (25:11)$)  {QuadraticModels.jl};
-        \node[External] (Tullio) at ($(MB) + (32.5:11)$)  {Tullio.jl};
-        \node[External] (SF) at ($(MB) + (40:11)$)  {SpecialFunctions.jl};
-        \node[External] (MatEq) at ($(MB) + (50:11)$)  {MatrixEquations.jl};
-        \node[External] (SWG) at ($(MB) + (60:11)$)  {SimpleWeightedGraphs.jl};
-        \node[External] (Gr) at ($(MB) + (75:11)$)  {Graphs.jl};
-        \node[External] (Kr) at ($(MB) + (90:11)$)  {Kronecker.jl};
-        \node[External] (SB) at ($(MB) + (105:11)$)  {StatsBase.jl};
+        \node[External] (LS) at ($(MB) + (0:11)$)  {Linesearches.jl};
+        \node[External] (LRU) at ($(MB) + (6:11)$)  {LRUCaches.jl};
+        \node[External] (RipQP) at ($(MB) + (12:11)$)  {RipQP.jl};
+        \node[External] (QM) at ($(MB) + (18:11)$)  {QuadraticModels.jl};
+        \node[External] (Tullio) at ($(MB) + (26:11)$)  {Tullio.jl};
+        \node[External] (SF) at ($(MB) + (31:11)$)  {SpecialFunctions.jl};
+        \node[External] (MatEq) at ($(MB) + (37:11)$)  {MatrixEquations.jl};
+        \node[External] (SWG) at ($(MB) + (44:11)$)  {SimpleWeightedGraphs.jl};
+        \node[External] (Gr) at ($(MB) + (51:11)$)  {Graphs.jl};
+        \node[External] (Kr) at ($(MB) + (59:11)$)  {Kronecker.jl};
+        \node[External] (SB) at ($(MB) + (68:11)$)  {StatsBase.jl};
         \node[External] (Asymptote) at ($(MB) + (120:11)$)  {Asymptote.jl};
-        \node[External] (Makie) at ($(MB) + (135:11)$)  {Makie.jl};
+        \node[External] (GB) at ($(MB) + (130:11)$)  {GeometryBasics.jl};
+        \node[External] (Makie) at ($(MB) + (140:11)$)  {Makie.jl};
         \node[External] (MIRK) at ($(MB) + (150:11)$)  {BoundaryValueDiffEq.jl};
         \node[External] (NLS) at ($(MB) + (157.5:11)$)  {NLSolve.jl};
-        % \node[External] (Test) at ($(MB) + (165:11)$)  {Test.jl};
         \node[External] (Quat) at ($(MB) + (165:11)$)  {Quaternions.jl};
         \node[External] (SA) at ($(MB) + (172.5:11)$)  {StaticArrays.jl};
         \node[External] (RAT) at ($(MB) + (180:11)$)  {RecursiveArrayTools.jl};
+        \node[External] (Test) at ($(MB) + (187.5:11)$)  {Test.jl};
         \node[External] (Plots) at ($(MB) + (195:11)$)  {Plots.jl};
-        \node[External] (SLMB) at ($(MB) + (225:11)$)  {SciMLBase.jl};
-        \node[External] (ODE) at ($(MB) + (240:11)$)  {OrdinaryDiffEq.jl};
-        \node[External] (DI) at ($(MB) + (280:11)$)  {DifferentiationInterface.jl};
-        \node[External] (AD) at ($(MB) + (295:11)$)  {ADTypes.jl};
-        \node[External] (Z) at ($(MB) + (305:11)$)  {Zygote.jl};
-        \node[External] (RD) at ($(MB) + (315:11)$)  {ReverseDiff.jl};
-        \node[External] (FD) at ($(MB) + (325:11)$)  {ForwardDiff.jl};
+        %
+        \node[External] (A) at ($(MB) + (202:11)$)  {Accessors.jl};
+        \node[External] (CB) at ($(MB) + (208:11)$)  {ConstructionBase.jl};
+        \node[External] (DEB) at ($(MB) + (214:11)$)  {DiffEqBase.jl};
+        \node[External] (ODEC) at ($(MB) + (220:11)$)  {OrdinaryDiffEqCore.jl};
+        \node[External] (SLMO) at ($(MB) + (229:11)$)  {SciMLOperators.jl};
+        \node[External] (SLMB) at ($(MB) + (239:11)$)  {SciMLBase.jl};
+        \node[External] (SUP) at ($(MB) + (249:11)$)  {SimpleUnPack.jl};
+        \node[External] (ODE) at ($(MB) + (265:11)$)  {OrdinaryDiffEq.jl};
+        %
+        \node[External] (DI) at ($(MB) + (290:11)$)  {DifferentiationInterface.jl};
+        \node[External] (AD) at ($(MB) + (302:11)$)  {ADTypes.jl};
+        \node[External] (Z) at ($(MB) + (311:11)$)  {Zygote.jl};
+        \node[External] (RD) at ($(MB) + (320:11)$)  {ReverseDiff.jl};
+        \node[External] (FD) at ($(MB) + (328:11)$)  {ForwardDiff.jl};
         \node[External] (FiniteDifferences) at ($(MB) + (335:11)$)  {FiniteDifferences.jl};
-        \node[External] (FiniteDiff) at ($(MB) + (345:11)$)  {FiniteDiff.jl};
+        \node[External] (FiniteDiff) at ($(MB) + (342:11)$)  {FiniteDiff.jl};
+        \node[External] (OA) at ($(MB) + (351:11)$)  {OffsetArrays.jl};
         \draw[depends2] (MA) -- (Asymptote);
         \draw[depends2] (MM) -- (Makie);
+        \draw[depends2] (MM) -- (GB);
         \begin{pgfonlayer}{background}
             \node[circle,
                 % fill=TolMutedPurple!10!white,
@@ -125,12 +134,13 @@
             \node[anchor = south, yshift=.2cm, text=TolMutedWine] at (Core.south) {central packages};
             \node[anchor = south, yshift=.2cm, text=TolMutedPurple] at (JM.south) {JuliaManifolds};
 
-            \draw[depends] (MD) to [bend right=18.75] (MOE);
+            \draw[depends] (MOE) to [bend right=0] (MD);
+            \draw[depends2] (MOE) to [bend right=0] (OA);
             %
-            % \draw[extends2] (Test) -- (M);
-            \draw[extends2] (Plots) to[bend right=22.5] (MB);
+            \draw[extends2] (Test) -- (M);
+            \draw[extends2] (Plots) to[bend right=0] (MB);
             \draw[extends2] (Plots) -- (M);
-            \draw[extends2] (Makie) to[bend right = 33.75] (MB);
+            \draw[extends2] (Makie) to[bend right = 0] (MB);
             \draw[extends2] (Quat) -- (MB);
             \draw[extends2] (RAT) to[bend left=22.5] (M);
             \draw[extends2] (NLS) to[bend left=6.125] (M);
@@ -138,13 +148,13 @@
             \draw[extends2] (RAT) to[bend left=12.25] (MB);
             %
             \draw[depends2] (M) to[bend right = 0] (Quat);
-            \draw[depends2] (M) to[bend left = 11.25] (Gr);
-            \draw[depends2] (M) to[bend left = 11.25] (Kr);
-            \draw[depends2] (M) to[bend left = 11.25] (SWG);
-            \draw[depends2] (M) to[bend right = 33.75] (SF);
-            \draw[depends2] (M) to[bend right = 6.125] (Tullio);
-            \draw[depends2] (M) to[bend left = 0] (SB);
-            \draw[depends2] (M) to [bend right = 6.125] (MatEq);
+            \draw[depends2] (M) to[bend right = 6.125] (Gr);
+            \draw[depends2] (M) to[bend right = 11.25] (Kr);
+            \draw[depends2] (M) to[bend right = 3.06125] (SWG);
+            \draw[depends2] (M) to[bend right = 0] (SF);
+            \draw[depends2] (M) to[bend right = 0] (Tullio);
+            \draw[depends2] (M) to[bend right = 22.5] (SB);
+            \draw[depends2] (M) to [bend right = 0] (MatEq);
             \draw[depends2] (M) to [bend right = 6.125] (SA);
             \draw[depends2] (LG) to [bend left = 0] (SA);
             \draw[depends2] (LG) -- (Quat);
@@ -156,10 +166,10 @@
             \draw[extends2] (LS) -- (MO);
             % LieGroups extensions
             \draw[extends2] (RAT) -- (LG);
-            % \draw[extends2] (Test) -- (LG);
+            \draw[extends2] (Test) -- (LG);
             % ManifoldDiff dependencies
-            \draw[depends2] (MD) -- (AD);
-            \draw[depends2] (MD) -- (DI);
+            \draw[depends2] (MD) to [bend left=6.125] (AD);
+            \draw[depends2] (MD) to [bend left=11.25] (DI);
             % ManifoldDiff weakdependencies
             \draw[extends2] (FiniteDiff) -- (MD);
             \draw[extends2] (FiniteDifferences) -- (MD);
@@ -168,9 +178,15 @@
             \draw[extends2] (Z) -- (MD);
             % ManifoldDiffEq dependencies
             \draw[depends] (MDE) to[bend left=27.625] (M);
-            \draw[depends2] (MDE) -- (ODE);
+            \draw[depends2] (MDE) to [bend right=11.25] (ODE);
             \draw[depends2] (MDE) to [bend left=0] (RAT);
             \draw[depends2] (MDE) -- (SLMB);
+            \draw[depends2] (MDE) -- (A);
+            \draw[depends2] (MDE) -- (CB);
+            \draw[depends2] (MDE) -- (DEB);
+            \draw[depends2] (MDE) -- (ODEC);
+            \draw[depends2] (MDE) -- (SLMO);
+            \draw[depends2] (MDE) to [bend right=6.125] (SUP);
         \end{pgfonlayer}
     \end{tikzpicture}
 \end{document}
