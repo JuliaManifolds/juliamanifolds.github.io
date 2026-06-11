@@ -45,5 +45,7 @@ makedocs(;
     ]
 )
 
+deploydocs(repo = "github.com/JuliaManifolds/juliamanifolds.github.io.git", push_preview = true)
+
 # ## Serve ?
 ("--serve" in ARGS) && serve(dir=joinpath(@__DIR__, "build"), launch_browser=true)
