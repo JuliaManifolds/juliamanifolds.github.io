@@ -19,19 +19,19 @@
         %text=white,
         ]
         % Styles of nodes
-        \tikzset{Base/.style={draw=TolMutedBlue, fill=TolMutedBlue!10, ellipse}}
-        \tikzset{Library/.style={draw=TolMutedGreen, fill=TolMutedGreen!10, ellipse}}
-        \tikzset{Func/.style={draw=TolMutedTeal, fill=TolMutedTeal!10, ellipse}}
-        \tikzset{Vis/.style={draw=TolMutedOlive, fill=TolMutedOlive!10, ellipse}}
-        \tikzset{External/.style={draw=TolMutedSand, fill=TolMutedSand!10, ellipse}}
-        \tikzset{Examples/.style={draw=TolMutedRose, fill=TolMutedRose!10, ellipse}}
+        \tikzset{Base/.style={draw=TolMutedCyan, fill=TolMutedCyan!33, ellipse, line width=1.5pt}}
+        \tikzset{Library/.style={draw=TolMutedGreen, fill=TolMutedGreen!33, ellipse, line width=1.5pt}}
+        \tikzset{Func/.style={draw=TolMutedTeal, fill=TolMutedTeal!33, ellipse, line width=1.5pt}}
+        \tikzset{Vis/.style={draw=TolMutedOlive, fill=TolMutedOlive!33, ellipse, line width=1.5pt}}
+        \tikzset{Examples/.style={draw=TolMutedRose, fill=TolMutedRose!33, ellipse, line width=1.5pt}}
+        \tikzset{External/.style={draw=TolMutedSand, fill=TolMutedSand!33, ellipse, line width=1pt}}
         % Styles of lines
         % format: a -- B ABExt loading B extends A
-        \tikzset{extends/.style={dashed, -{Stealth[length=3mm]}, line width=2pt}}
+        \tikzset{extends/.style={dashed, -{Stealth[length=3mm]}, line width=2pt,TolMutedBlue}}
         % V2: to external packages
         \tikzset{extends2/.style={dashed, -{Stealth[length=2.5mm]},line width=1pt, TolMutedSand}}
         % format A -- B A is a dependency of B, we draw B-->A
-        \tikzset{depends/.style={solid, -{Stealth[length=3mm]},line width=2pt}}
+        \tikzset{depends/.style={solid, -{Stealth[length=3mm]},line width=2pt,TolMutedBlue}}
         % V2: to external packages
         \tikzset{depends2/.style={solid, -{Stealth[length=2.5mm]}, line width=1pt, TolMutedSand}}
         \node[Base] (MB) at (0,0) {ManifoldsBase.jl};
@@ -130,7 +130,28 @@
         \draw[depends2] (MA) -- (Asymptote);
         \draw[depends2] (MM) -- (Makie);
         \draw[depends2] (MM) -- (GB);
+                %
+        % Legend
+        \node[rectangle, draw=black!66!white,fill=black!33!white] (Legend) at (12,-9.5) {%
+            \begin{tikzpicture}
+                \node[label = {[label distance=.2cm]0:{{\bfseries Package colors}}}] (T) at (-0.6,0.6) {};
+                \node[Base, label = {[label distance=.2cm]0:Interface}] (lB) at (0,0) {};
+                \node[Library, label = {[label distance=.2cm]0:Library}] (lL) at (0,-0.6) {};
+                \node[Func, label = {[label distance=.2cm]0:Functions}] (lF) at (0,-1.2) {};
+                \node[Vis, label = {[label distance=.2cm]0:Plotting}] (lV) at (2.5,0) {};
+                \node[Examples, label = {[label distance=.2cm]0:Examples}] (lExa) at (2.5,-0.6) {};
+                \node[External, label = {[label distance=.2cm]0:External}] (lExt) at (2.5,-1.2) {};
+                \draw[depends] (.3,-1.8) node[xshift=-2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: A depends on B ({\color{TolMutedSand}external})}, xshift=2mm] {B};
+                \draw[extends] (.3,-2.4) node[xshift = -2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: ({\color{TolMutedSand}external}) A extends B}, xshift=2mm] {B};
+            \end{tikzpicture}
+        };
+        % Most of the lines: draw on background
         \begin{pgfonlayer}{background}
+            \path[use as bounding box] (current bounding box.south west) rectangle (current bounding box.north east);
+            \fill[
+                white,
+                % black,
+            ] (current bounding box.south west) rectangle (current bounding box.north east);
             \node[circle,
                 % fill=TolMutedPurple!10!white,
                 draw=TolMutedPurple, line width=3pt,
@@ -201,20 +222,5 @@
             \draw[depends2] (MDE) to[bend left=11.25] (SLMO);
             \draw[depends2] (MDE) to[bend left=6.525] (SUP);
         \end{pgfonlayer}
-        %
-        % Legend
-        \node[rectangle, draw] (Legend) at (12,-9.5) {%
-            \begin{tikzpicture}
-                \node[label = {[label distance=.2cm]0:{{\bfseries Package colors}}}] (T) at (-0.6,0.6) {};
-                \node[Base, label = {[label distance=.2cm]0:Interface}] (lB) at (0,0) {};
-                \node[Library, label = {[label distance=.2cm]0:Library}] (lL) at (0,-0.6) {};
-                \node[Func, label = {[label distance=.2cm]0:Functions}] (lF) at (0,-1.2) {};
-                \node[Vis, label = {[label distance=.2cm]0:Plotting}] (lV) at (2.5,0) {};
-                \node[Examples, label = {[label distance=.2cm]0:Examples}] (lExa) at (2.5,-0.6) {};
-                \node[External, label = {[label distance=.2cm]0:External}] (lExt) at (2.5,-1.2) {};
-                \draw[depends] (.3,-1.8) node[xshift=-2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: ({\color{TolMutedSand}external}) A depends on B}, xshift=2mm] {B};
-                \draw[extends] (.3,-2.4) node[xshift = -2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: ({\color{TolMutedSand}external}) A extends B}, xshift=2mm] {B};
-            \end{tikzpicture}
-        };
     \end{tikzpicture}
 \end{document}
