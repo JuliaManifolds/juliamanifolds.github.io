@@ -16,7 +16,7 @@ jobs:
           version: "1.12"
       - name: Julia Cache
         uses: julia-actions/cache@v3
-      - name: "Documenter rendering (including Quarto)"
+      - name: "Documenter rendering"
         run: "docs/make.jl"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
