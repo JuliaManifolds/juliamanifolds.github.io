@@ -1,8 +1,9 @@
 name: Render
 on:
   push:
-    branches:
-      - main
+    branches: [master]
+  pull_request:
+
 jobs:
   aggregate:
     runs-on: ubuntu-latest
