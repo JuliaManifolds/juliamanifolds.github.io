@@ -1,7 +1,5 @@
 # Julia Manifolds
 
-## Mission statement
-
 [JuliaManifolds](https://github.com/JuliaManifolds) is an ecosystem of [Julia]() packages
 focussing on numerical differential geometry and provide these tools for researchers
 for example from physics, robotics or statistics and other areas where [Riemannian manifolds](https://en.wikipedia.org/wiki/Riemannian_manifold)
