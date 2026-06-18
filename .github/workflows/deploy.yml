@@ -1,4 +1,4 @@
-name: Aggregate
+name: Render
 on:
   push:
     branches:
@@ -11,19 +11,11 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: '1.12'
-      - uses: actions/cache@v5
-        env:
-          cache-name: cache-artifacts
-        with:
-          path: ~/.julia/artifacts
-          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-test-
-            ${{ runner.os }}-
+      - name: Julia Cache
+        uses: julia-actions/cache@v3
       - name: Install dependencies
         run: julia --project=docs -e 'using Pkg; Pkg.instantiate()'
-      - name: Aggregate and deploy
+      - name: Render and deploy
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
