@@ -17,7 +17,7 @@ dependencies and extensions into the Julia package ecosystem.
 ### ManifoldsBase.jl
 
 [`ManifoldsBase.jl`](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/)
-defines an API to define a with Riemannian manifolds and how to implement its numerical compuations.
+defines an API to define a with Riemannian manifolds and how to implement its numerical computations.
 The main focus here is two-fold: On the one hand it allows to define new numerical algorithms
 that work on an abstract Riemannian manifold and just depend on the availability of e.g. a [retraction](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/retractions/)
 on such a manifold.
@@ -55,16 +55,47 @@ Again, a thorough documentation and testing of the Lie groups is provided as wel
 
 ### ManifoldDiffEq.jl
 
+[`ManifoldDiffEq.jl`](https://juliamanifolds.github.io/ManifoldDiffEq.jl/stable/) provides solvers
+for differential equations defined on either manifolds defined in [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/)
+or Lie groups from [`LieGroups.jl`](https://juliamanifolds.github.io/LieGroups.jl/stable/).
+It is build using the [`OrdinaryDiffEq.jl`](https://docs.sciml.ai/DiffEqDocs/stable/) interface.
+
 ### ManifoldDiff.jl
 
-### ManifoldsGPU.jl
+[`ManifoldDiff.jl`](https://juliamanifolds.github.io/ManifoldDiff.jl/stable/) uses the [`DifferentiationInterface.jl`](https://juliadiff.org/DifferentiationInterface.jl/DifferentiationInterface/stable/) to define automatic differentiation (AD) rules on manifolds defined in [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/) as well as a library of given gradients, differentials, Hessians, proximal maps etc.
 
 ### ManoptExamples.jl
 
+[`ManoptExamples.jl`](https://juliamanifolds.github.io/ManoptExamples.jl/stable/) is a collection of
+examples of optimisation tasks that are solved using solvers from
+[`Manopt.jl`](https://manoptjl.org). The ingredients like objectives, gradients, proximal maps,
+are defined, documented and tested in this package as well.
+
+### ManifoldsGPU.jl
+
+[`ManifoldsGPU.jl`](https://juliamanifolds.github.io/ManifoldsGPU.jl/dev/) aims to provide GPU
+support for manifolds defined in [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/).
+For now, the support is provided for CUDA mainly using [`CUDA.jl`](https://juliagpu.org/backends/cuda/).
+
 ### ManifoldMakie.jl
+
+[`ManifoldMakie.jl`](https://juliamanifolds.github.io/ManifoldMakie.jl/stable/) combines the manifolds from [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/) with plotting recipes from [`Makie.jl`](https://makie.org/) to provide easily accessible visualization methods for manifold-valued data.
 
 ### ManifoldAsymptote.jl
 
+[`ManifoldAsymptote.jl`](https://juliamanifolds.github.io/ManifoldAsymptote.jl/stable/)
+follows a similar idea as the previous package, just that the rendering is done using [Asymptote](https://asymptote.sourceforge.io/).
+The code of this package is a bit outdated and not very flexible. This package should be considered legacy code.
+
 ### Glossaries.jl
 
+[`Glossaries.jl`](https://juliamanifolds.github.io/Glossaries.jl/stable/) is a package to define
+a glossary of term to be used within a documentation. This is especially meant for the case, where
+one keyword or argument is used relatively often. Then it is beneficital to store its name, description and default value
+in the glossary only once and reuse this one definition throughout a documentation.
+This is used within the documentation of [`Manopt.jl`](https://manoptjl.org)
+
 ### AlgorithmsInterface.jl
+
+[`AlgorithmsInterface.jl`](https://juliamanifolds.github.io/AlgorithmsInterface.jl/stable/) is a package to define a unified interface to define iterative algorithms. It started in a similar fashion as [`ManifoldsBase.jl`](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/) to define a general API for algorithms that [`Manopt.jl`](https://manoptjl.org) could use.
+Currently the package is still in an early phase and [`Manopt.jl`](https://manoptjl.org) was not yet refactored to use this package.
