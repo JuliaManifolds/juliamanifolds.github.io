@@ -1,0 +1,226 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+% Define muted colors.
+\definecolor{TolMutedBlue}{HTML}{332288}   % Base / Interfaces
+\definecolor{TolMutedCyan}{HTML}{88CCEE}   %
+\definecolor{TolMutedTeal}{HTML}{44AA99}   % Function / Diff
+\definecolor{TolMutedGreen}{HTML}{117733}  % Libraries
+\definecolor{TolMutedOlive}{HTML}{999933}  % Plotting/Vis
+\definecolor{TolMutedSand}{HTML}{DDCC77}   % External
+\definecolor{TolMutedRose}{HTML}{CC6677}   % Examples
+\definecolor{TolMutedWine}{HTML}{882255}   % JuliaManifolds
+\definecolor{TolMutedPurple}{HTML}{AA4499} % Core
+\begin{document}
+    \begin{tikzpicture}[
+        %text=white,
+        ]
+        % Styles of nodes
+        \tikzset{Base/.style={draw=TolMutedCyan, fill=TolMutedCyan!33, ellipse, line width=1.5pt}}
+        \tikzset{Library/.style={draw=TolMutedGreen, fill=TolMutedGreen!33, ellipse, line width=1.5pt}}
+        \tikzset{Func/.style={draw=TolMutedTeal, fill=TolMutedTeal!33, ellipse, line width=1.5pt}}
+        \tikzset{Vis/.style={draw=TolMutedOlive, fill=TolMutedOlive!33, ellipse, line width=1.5pt}}
+        \tikzset{Examples/.style={draw=TolMutedRose, fill=TolMutedRose!33, ellipse, line width=1.5pt}}
+        \tikzset{External/.style={draw=TolMutedSand, fill=TolMutedSand!33, ellipse, line width=1pt}}
+        % Styles of lines
+        % format: a -- B ABExt loading B extends A
+        \tikzset{extends/.style={dashed, -{Stealth[length=3mm]}, line width=2pt,TolMutedBlue}}
+        % V2: to external packages
+        \tikzset{extends2/.style={dashed, -{Stealth[length=2.5mm]},line width=1pt, TolMutedSand}}
+        % format A -- B A is a dependency of B, we draw B-->A
+        \tikzset{depends/.style={solid, -{Stealth[length=3mm]},line width=2pt,TolMutedBlue}}
+        % V2: to external packages
+        \tikzset{depends2/.style={solid, -{Stealth[length=2.5mm]}, line width=1pt, TolMutedSand}}
+        \node[Base] (MB) at (0,0) {ManifoldsBase.jl};
+        %
+        % Ring I: Core packages
+        \node[Library] (M) at ($(MB) + (108:3.5cm)$) {Manifolds.jl};
+        \node[Library] (MO) at ($(MB) + (36:3.5cm)$) {Manopt.jl};
+        \node[Library] (LG) at ($(MB) + (180:3.9cm)$) {LieGroups.jl};
+        \node[Library] (MDE) at ($(MB) + (252:3.5cm)$) {ManifoldDiffEq.jl};
+        \node[Func] (MD) at ($(MB) + (324:3.5cm)$) {ManifoldDiff.jl};
+        \draw[depends] (M) -- (MB);
+        \draw[depends] (MO) -- (MB);
+        \draw[depends] (LG) -- (MB);
+        \draw[depends] (LG) to[bend left=5.75] (M);
+        \draw[depends] (MDE) -- (MB);
+        \draw[depends] (MD) -- (MB);
+        \draw[depends] (M) to[bend left=22.5] (MD);
+        \draw[extends] (M) to[bend left=11.25] (MO);
+        % Ring II
+        %
+        % Same direction as Manopt continued
+        \node[Examples] (MOE) at ($(MB) + (354.375:7cm)$) {ManoptExamples.jl};
+        \draw[depends] (MOE) -- (MO);
+        %
+        % Sidequest: Glossaries
+        \node[Func] (G) at ($(MB) + (28.125:7cm)$) {Glossaries.jl};
+        \draw[depends] (MO) -- (G);
+        \node[Base] (AI) at ($(MB) + (278.75:7cm)$) {AlgorithmInterface.jl};
+
+        %
+        % Sidequest Viz
+        \node[Vis] (MA) at ($(MB) + (112.5:7cm)$) {ManifoldAsymptote.jl};
+        \draw[depends] (M) -- (MA);
+        \node[Vis] (MM) at ($(MB) + (129.375:7cm)$) {ManifoldMakie.jl};
+        \draw[depends] (M) -- (MM);
+        \node[Func] (MG) at ($(MB) + (75:7cm)$) {ManifoldsGPU.jl};
+        \draw[depends] (M) -- (MG);
+        \draw[depends] (MB) -- (MG);
+        %
+        %
+        % Extensions and outer packages on a large circle
+        % excluded: Packages from the base language:
+        % LinearAlgebra, Markdown, Preferences, Printf, Random, Statistics,
+        % Colors, RecipesBase (since we mention PLots)
+        % DoubleFloats (ManifoldDiffEq)
+        % DataStructures, Dates (Manopt)
+        % Currently not added:
+        % ScopedValues (for AløgorithmsInterface)
+        % Distributions, HybridArrays, DiffEqCallbacks (ext to Manifolds, used in ManoptExamples)
+        \node[External] (DS) at ($(MB) + (359:11)$)  {DataStructures.jl};
+        \node[External] (LS) at ($(MB) + (4:11)$)  {Linesearches.jl};
+        \node[External] (LRU) at ($(MB) + (9:11)$)  {LRUCaches.jl};
+        \node[External] (RipQP) at ($(MB) + (14:11)$)  {RipQP.jl};
+        \node[External] (QM) at ($(MB) + (19:11)$)  {QuadraticModels.jl};
+
+        \node[External] (Tullio) at ($(MB) + (26:11)$)  {Tullio.jl};
+        \node[External] (SF) at ($(MB) + (31:11)$)  {SpecialFunctions.jl};
+        \node[External] (MatEq) at ($(MB) + (37:11)$)  {MatrixEquations.jl};
+        \node[External] (SWG) at ($(MB) + (44:11)$)  {SimpleWeightedGraphs.jl};
+        \node[External] (Gr) at ($(MB) + (51:11)$)  {Graphs.jl};
+        \node[External] (Kr) at ($(MB) + (59:11)$)  {Kronecker.jl};
+        \node[External] (SB) at ($(MB) + (68:11)$)  {StatsBase.jl};
+        \node[External] (CUDA) at ($(MB) + (81:11)$)  {CUDA.jl};
+        \node[External] (Asymptote) at ($(MB) + (120:11)$)  {Asymptote.jl};
+        \node[External] (GB) at ($(MB) + (130:11)$)  {GeometryBasics.jl};
+        \node[External] (Makie) at ($(MB) + (140:11)$)  {Makie.jl};
+        \node[External] (NLS) at ($(MB) + (147:11)$)  {NLSolve.jl};
+        \node[External] (DECB) at ($(MB) + (153:11)$)  {DiffEqCallbacks.jl};
+        \node[External] (MIRK) at ($(MB) + (159:11)$)  {BoundaryValueDiffEq.jl};
+        \node[External] (Dist) at ($(MB) + (165:11)$)  {Distributions.jl};
+        \node[External] (Quat) at ($(MB) + (170.5:11)$)  {Quaternions.jl};
+        \node[External] (HA) at ($(MB) + (175.5:11)$)  {HybridArrays.jl};
+        \node[External] (SA) at ($(MB) + (181:11)$)  {StaticArrays.jl};
+        \node[External] (RAT) at ($(MB) + (186:11.5)$)  {RecursiveArrayTools.jl};
+        \node[External] (Test) at ($(MB) + (192.5:11)$)  {Test.jl};
+        \node[External] (Plots) at ($(MB) + (197.5:11)$)  {Plots.jl};
+        %
+        \node[External] (A) at ($(MB) + (202.5:11)$)  {Accessors.jl};
+        \node[External] (CB) at ($(MB) + (208:11)$)  {ConstructionBase.jl};
+        \node[External] (DEB) at ($(MB) + (214:11)$)  {DiffEqBase.jl};
+        \node[External] (ODE) at ($(MB) + (220:11)$)  {OrdinaryDiffEq.jl};
+        \node[External] (ODEC) at ($(MB) + (227:11)$)  {OrdinaryDiffEqCore.jl};
+        \node[External] (SLMB) at ($(MB) + (235:11)$)  {SciMLBase.jl};
+        \node[External] (SLMO) at ($(MB) + (244:11)$)  {SciMLOperators.jl};
+        \node[External] (SUP) at ($(MB) + (256:11)$)  {SimpleUnPack.jl};
+        % last new ones
+        %
+        \node[External] (DI) at ($(MB) + (290:11)$)  {DifferentiationInterface.jl};
+        \node[External] (AD) at ($(MB) + (302:11)$)  {ADTypes.jl};
+        \node[External] (Z) at ($(MB) + (311:11)$)  {Zygote.jl};
+        \node[External] (RD) at ($(MB) + (320:11)$)  {ReverseDiff.jl};
+        \node[External] (FD) at ($(MB) + (328:11)$)  {ForwardDiff.jl};
+        \node[External] (FiniteDifferences) at ($(MB) + (335:11)$)  {FiniteDifferences.jl};
+        \node[External] (FiniteDiff) at ($(MB) + (342:11)$)  {FiniteDiff.jl};
+        \node[External] (OA) at ($(MB) + (351:11)$)  {OffsetArrays.jl};
+        \draw[depends2] (MA) -- (Asymptote);
+        \draw[depends2] (MM) -- (Makie);
+        \draw[depends2] (MM) -- (GB);
+                %
+        % Legend
+        \node[rectangle, draw=black!66!white,fill=black!33!white] (Legend) at (12,-9.5) {%
+            \begin{tikzpicture}
+                \node[label = {[label distance=.2cm]0:{{\bfseries Package colors}}}] (T) at (-0.6,0.6) {};
+                \node[Base, label = {[label distance=.2cm]0:Interface}] (lB) at (0,0) {};
+                \node[Library, label = {[label distance=.2cm]0:Library}] (lL) at (0,-0.6) {};
+                \node[Func, label = {[label distance=.2cm]0:Functions}] (lF) at (0,-1.2) {};
+                \node[Vis, label = {[label distance=.2cm]0:Plotting}] (lV) at (2.5,0) {};
+                \node[Examples, label = {[label distance=.2cm]0:Examples}] (lExa) at (2.5,-0.6) {};
+                \node[External, label = {[label distance=.2cm]0:External}] (lExt) at (2.5,-1.2) {};
+                \draw[depends] (.3,-1.8) node[xshift=-2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: A depends on B ({\color{TolMutedSand}external})}, xshift=2mm] {B};
+                \draw[extends] (.3,-2.4) node[xshift = -2mm] {A} -- ++(0.7,0) node[label = {[label distance=.2cm]0: ({\color{TolMutedSand}external}) A extends B}, xshift=2mm] {B};
+            \end{tikzpicture}
+        };
+        % Most of the lines: draw on background
+        \begin{pgfonlayer}{background}
+            \path[use as bounding box] (current bounding box.south west) rectangle (current bounding box.north east);
+            \fill[
+                white,
+                % black,
+            ] (current bounding box.south west) rectangle (current bounding box.north east);
+            \node[circle,
+                % fill=TolMutedPurple!10!white,
+                draw=TolMutedPurple, line width=3pt,
+                inner sep=6.4cm] (JM) at (MB) {};
+            \node[circle,
+                % fill=TolMutedWine!10!white,
+                draw=TolMutedWine, line width=3pt,
+                inner sep=3.9cm] (Core) at (MB) {};
+            \node[anchor = south, yshift=.2cm, text=TolMutedWine] at (Core.south) {central packages};
+            \node[anchor = south, yshift=.2cm, text=TolMutedPurple] at (JM.south) {JuliaManifolds};
+
+            \draw[depends] (MOE) to [bend right=0] (MD);
+            \draw[depends2] (MOE) to [bend right=0] (OA);
+            %
+            \draw[extends2] (Test) -- (M);
+            \draw[extends2] (Plots) to[bend right=0] (MB);
+            \draw[extends2] (Plots) -- (M);
+            \draw[extends2] (Makie) to[bend right = 0] (MB);
+            \draw[extends2] (Quat) -- (MB);
+            \draw[extends2] (RAT) to[bend right=0] (M);
+            \draw[extends2] (NLS) to[bend left=0] (M);
+            \draw[extends2] (Dist) to[bend left=2.5625] (M);
+            \draw[extends2] (DECB) -- (M);
+            \draw[extends2] (HA) to[bend left=5.125] (M);
+            \draw[extends2] (MIRK) -- (M);
+            \draw[extends2] (RAT) to[bend left=16.325] (MB);
+            %
+            \draw[depends2] (M) to[bend right = 5.625] (Quat);
+            \draw[depends2] (M) to[bend right = 5.625] (Gr);
+            \draw[depends2] (M) to[bend right = 11.25] (Kr);
+            \draw[depends2] (M) to[bend right = 2.56125] (SWG);
+            \draw[depends2] (M) to[bend right = 0] (SF);
+            \draw[depends2] (M) to[bend right = 0] (Tullio);
+            \draw[depends2] (M) to[bend right = 22.5] (SB);
+            \draw[depends2] (M) to [bend right = 0] (MatEq);
+            \draw[depends2] (M) to [bend right = 5.625] (SA);
+            \draw[depends2] (LG) to [bend right = 11.25] (SA);
+            \draw[depends2] (LG) -- (Quat);
+            \draw[extends2] (CUDA) -- (MG);
+            % Manopt extensions
+            \draw[depends2] (MO) to [bend right = 0] (DS);
+            \draw[extends2] (RAT) to[bend left=9.125] (MO);
+            \draw[extends2] (RipQP) -- (MO);
+            \draw[extends2] (QM) -- (MO);
+            \draw[extends2] (LRU) -- (MO);
+            \draw[extends2] (LS) -- (MO);
+            % LieGroups extensions
+            \draw[extends2] (RAT) to[bend left = 5.625] (LG);
+            \draw[extends2] (Test) -- (LG);
+            % ManifoldDiff dependencies
+            \draw[depends2] (MD) to [bend left=5.625] (AD);
+            \draw[depends2] (MD) to [bend left=11.25] (DI);
+            % ManifoldDiff weakdependencies
+            \draw[extends2] (FiniteDiff) -- (MD);
+            \draw[extends2] (FiniteDifferences) -- (MD);
+            \draw[extends2] (FD) -- (MD);
+            \draw[extends2] (RD) -- (MD);
+            \draw[extends2] (Z) -- (MD);
+            % ManifoldDiffEq dependencies
+            \draw[depends] (MDE) to[bend left=33.75] (M);
+            \draw[depends2] (MDE) to [bend left=0] (RAT);
+            \draw[depends2] (MDE) to[bend left=0] (DEB);
+            \draw[depends2] (MDE) -- (A);
+            \draw[depends2] (MDE) -- (CB);
+            \draw[depends2] (MDE) to[bend left=5.625] (ODE);
+            \draw[depends2] (MDE) to[bend left=11.25] (ODEC);
+            \draw[depends2] (MDE) to[bend left=16.875] (SLMB);
+            \draw[depends2] (MDE) to[bend left=11.25] (SLMO);
+            \draw[depends2] (MDE) to[bend left=6.525] (SUP);
+        \end{pgfonlayer}
+    \end{tikzpicture}
+\end{document}
