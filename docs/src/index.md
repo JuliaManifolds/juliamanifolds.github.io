@@ -45,7 +45,7 @@ be exchanged and compared to other choices.
 ### LieGroups.jl
 
 [`LieGroups.jl`](https://juliamanifolds.github.io/LieGroups.jl/stable/) extends the interface
-of `ManifoldsBase.jl` to [Lie groups](https://en.wikipedia.org/wiki/Lie_group), i.e. Riemannian manifolds equipped with a group structure.
+of `ManifoldsBase.jl` to [Lie groups](https://en.wikipedia.org/wiki/Lie_group), i.e. manifolds equipped with a group structure.
 It introduces for example the [Lie algebra](https://juliamanifolds.github.io/LieGroups.jl/stable/interface/algebra/),
 [group operation](https://juliamanifolds.github.io/LieGroups.jl/stable/interface/operations/) and [group action](https://juliamanifolds.github.io/LieGroups.jl/stable/interface/actions/).
 It also introduces general variants to construct Lile groups from these like the [semidirect product Lie group](https://juliamanifolds.github.io/LieGroups.jl/stable/groups/semidirect_product_group/#LieGroups.LeftSemidirectProductGroupOperation).
