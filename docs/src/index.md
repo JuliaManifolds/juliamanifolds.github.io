@@ -1,6 +1,6 @@
 # Julia Manifolds
 
-[JuliaManifolds](https://github.com/JuliaManifolds) is an ecosystem of [Julia]() packages
+[JuliaManifolds](https://github.com/JuliaManifolds) is an ecosystem of [Julia](https://julialang.org) packages
 focusing on numerical differential geometry and provide these tools for researchers and engineers
 for example from physics, robotics, statistics and other areas where [Riemannian manifolds](https://en.wikipedia.org/wiki/Riemannian_manifold), Lie groups and other geometric structures
 appear in computations and numerical analysis.
@@ -61,7 +61,10 @@ It is build using the [`OrdinaryDiffEq.jl`](https://docs.sciml.ai/DiffEqDocs/sta
 
 ### ManifoldDiff.jl
 
-[`ManifoldDiff.jl`](https://juliamanifolds.github.io/ManifoldDiff.jl/stable/) uses the [`DifferentiationInterface.jl`](https://juliadiff.org/DifferentiationInterface.jl/DifferentiationInterface/stable/) to define automatic differentiation (AD) rules on manifolds defined in [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/) as well as a library of given gradients, differentials, Hessians, proximal maps etc.
+[`ManifoldDiff.jl`](https://juliamanifolds.github.io/ManifoldDiff.jl/stable/)
+provides a library of of given gradients, differentials, Hessians, proximal maps and other
+differentiation related operations.
+It further uses the [`DifferentiationInterface.jl`](https://juliadiff.org/DifferentiationInterface.jl/DifferentiationInterface/stable/) to define automatic differentiation (AD) rules on manifolds defined in [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/) as well as a library of given gradients, differentials, Hessians, proximal maps etc.
 
 ### ManoptExamples.jl
 
