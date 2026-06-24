@@ -16,9 +16,9 @@ dependencies and extensions into the Julia package ecosystem.
 ### ManifoldsBase.jl
 
 [`ManifoldsBase.jl`](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/)
-defines an API to define a with Riemannian manifolds and how to implement its numerical computations.
+provides an API of basic operations on manifolds relevant for numerical computations.
 The main focus here is two-fold: On the one hand it allows to define new numerical algorithms
-that work on an abstract Riemannian manifold and just depend on the availability of e.g. a [retraction](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/retractions/)
+that work on abstract manifolds and just depend on the availability of e.g. a [retraction](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/retractions/)
 on such a manifold.
 It also provides generic construction method for manifolds such as a [product manifolds](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/metamanifolds/#ProductManifold),
 [power manifolds](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/metamanifolds/#sec-power-manifold) or the [tangent spaces](https://juliamanifolds.github.io/ManifoldsBase.jl/stable/metamanifolds/#Tangent-Space).
