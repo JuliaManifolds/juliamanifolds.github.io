@@ -27,10 +27,10 @@ On the other hand it allows to define new manifolds that can be used in such alg
 ### Manifolds.jl
 
 [`Manifolds.jl`](https://juliamanifolds.github.io/Manifolds.jl/stable/)
-provides a library of Riemannian manifolds implemented using the interface provided by `ManifoldsBase.jl`.
+provides a library of (primarily) Riemannian manifolds implemented using the interface provided by `ManifoldsBase.jl`.
 Efficient implementations as well as a thorough documentation of the mathematical details
 and usability are a main focus of this package.
-Some new aspects of Riemannian manifolds are first experimented with in this package before
+The package is largely stable, although some new aspects of Riemannian manifolds are first experimented with in this package before
 they are included in the generic interface.
 
 ### Manopt.jl
