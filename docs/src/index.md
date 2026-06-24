@@ -1,11 +1,10 @@
 # Julia Manifolds
 
 [JuliaManifolds](https://github.com/JuliaManifolds) is an ecosystem of [Julia]() packages
-focussing on numerical differential geometry and provide these tools for researchers
-for example from physics, robotics or statistics and other areas where [Riemannian manifolds](https://en.wikipedia.org/wiki/Riemannian_manifold)
+focusing on numerical differential geometry and provide these tools for researchers and engineers
+for example from physics, robotics, statistics and other areas where [Riemannian manifolds](https://en.wikipedia.org/wiki/Riemannian_manifold), Lie groups and other geometric structures
 appear in computations and numerical analysis.
-Our goal is to provide these tools in an well-documented and accessible way but also focus on
-efficient implementations.
+Our goal is to provide these tools in an well-documented, efficient and accessible way.
 
 ## Overview of registered packages
 
